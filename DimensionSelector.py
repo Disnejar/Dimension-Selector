@@ -24,6 +24,7 @@ class DIMENSIONSELTOOL_OT_select(bpy.types.Operator):
         new_dim[1] = context.scene.Y
         new_dim[2] = context.scene.Z
         
+        
         if not context.scene.add:
             for obj in context.selected_objects:
                 obj.select_set(False)
@@ -45,23 +46,23 @@ class DIMENSIONSELTOOL_OT_select(bpy.types.Operator):
                             obj.select_set(True)
                             context.view_layer.objects.active = obj
                             
-            if True:#context.scene.smaller:
+            if context.scene.smaller:
                 if round(obj.dimensions.x, 3) <= round(new_dim[0], 3) and round(obj.dimensions.y, 3) <= round(new_dim[1], 3) and round(obj.dimensions.z, 3) <= round(new_dim[2], 3):
                     if context.scene.allSmaller:
                         obj.select_set(True)
                         context.view_layer.objects.active = obj
                     else:
-                        if round(obj.dimensions.x, 3) >= round(new_dim[0], 3) * float(context.scene.smallerPercentage) / 100.0 and round(obj.dimensions.y, 3) >= round(new_dim[0], 3) * float(context.scene.smallerPercentage) / 100.0 and round(obj.dimensions.z, 3) >= round(new_dim[0], 3) * float(context.scene.smallerPercentage) / 100.0:
+                        if round(obj.dimensions.x, 3) >= round(new_dim[0], 3) * float(context.scene.smallerPercentage) / 100.0 and round(obj.dimensions.y, 3) >= round(new_dim[1], 3) * float(context.scene.smallerPercentage) / 100.0 and round(obj.dimensions.z, 3) >= round(new_dim[2], 3) * float(context.scene.smallerPercentage) / 100.0:
                             obj.select_set(True)
                             context.view_layer.objects.active = obj
                     
-            if True:#context.scene.bigger:
+            if context.scene.bigger:
                 if round(obj.dimensions.x, 3) >= round(new_dim[0], 3) and round(obj.dimensions.y, 3) >= round(new_dim[1], 3) and round(obj.dimensions.z, 3) >= round(new_dim[2], 3):
                     if context.scene.allBigger:
                         obj.select_set(True)
                         context.view_layer.objects.active = obj
                     else:
-                        if round(obj.dimensions.x, 3) <= round(new_dim[0], 3) * float(context.scene.biggerPercentage) / 100.0 and round(obj.dimensions.y, 3) <= round(new_dim[0], 3) * float(context.scene.biggerPercentage) / 100.0 and round(obj.dimensions.z, 3) <= round(new_dim[0], 3) * float(context.scene.biggerPercentage) / 100.0:
+                        if round(obj.dimensions.x, 3) <= round(new_dim[0], 3) * float(context.scene.biggerPercentage) / 100.0 and round(obj.dimensions.y, 3) <= round(new_dim[1], 3) * float(context.scene.biggerPercentage) / 100.0 and round(obj.dimensions.z, 3) <= round(new_dim[2], 3) * float(context.scene.biggerPercentage) / 100.0:
                             obj.select_set(True)
                             context.view_layer.objects.active = obj
                         
@@ -116,29 +117,29 @@ class DIMENSIONSELTOOL_PT_selection_panel(bpy.types.Panel):
         row.prop(context.scene, 'add')
         
         
-        #row = self.layout.row()
-        #row.prop(context.scene, 'bigger')
-        
-        #if context.scene.bigger:
         row = self.layout.row()
-        row.prop(context.scene, 'allBigger')
-            
-            #if not context.scene.allBigger:
-                #row = self.layout.row()
-                #row.prop(context.scene, 'biggerPercentage')
-                
-                
-        #row = self.layout.row()
-        #row.prop(context.scene, 'smaller')
+        row.prop(context.scene, 'bigger')
         
-        #if context.scene.smaller:
-        row = self.layout.row()
-        row.prop(context.scene, 'allSmaller')
-            
-            #if not context.scene.allSmaller:
-                #row = self.layout.row()
-                #row.prop(context.scene, 'smallerPercentage')
+        if context.scene.bigger:
+            row = self.layout.row()
+            row.prop(context.scene, 'allBigger')
                 
+            if not context.scene.allBigger:
+                row = self.layout.row()
+                row.prop(context.scene, 'biggerPercentage')
+                
+                
+        row = self.layout.row()
+        row.prop(context.scene, 'smaller')
+        
+        if context.scene.smaller:
+            row = self.layout.row()
+            row.prop(context.scene, 'allSmaller')
+                
+            if not context.scene.allSmaller:
+                row = self.layout.row()
+                row.prop(context.scene, 'smallerPercentage')
+                    
         row = self.layout.row()
         row.operator('dimensionseltool.select')
         
@@ -154,7 +155,7 @@ PROPS = [
     ('allSmaller', bpy.props.BoolProperty(name='Select All Smaller Objects', default=False)),
     ('allBigger', bpy.props.BoolProperty(name='Select All Bigger Objects', default=False)),
     ('biggerPercentage', bpy.props.IntProperty(name='Percantage', default=150, soft_max = 500, min = 100, soft_min = 100, subtype = 'PERCENTAGE')),
-    ('smallerPercentage', bpy.props.IntProperty(name='Percantage', default=50, soft_max = 500, min = 0, subtype = 'PERCENTAGE')),
+    ('smallerPercentage', bpy.props.IntProperty(name='Percantage', default=50, max = 100, min = 0, subtype = 'PERCENTAGE')),
 ]
 
 CLASSES = [
