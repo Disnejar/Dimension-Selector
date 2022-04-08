@@ -55,7 +55,31 @@ class DIMENSIONSELTOOL_OT_select(bpy.types.Operator):
                         if round(obj.dimensions.x, 3) >= round(new_dim[0], 3) * float(context.scene.smallerPercentage) / 100.0 and round(obj.dimensions.y, 3) >= round(new_dim[1], 3) * float(context.scene.smallerPercentage) / 100.0 and round(obj.dimensions.z, 3) >= round(new_dim[2], 3) * float(context.scene.smallerPercentage) / 100.0:
                             obj.select_set(True)
                             context.view_layer.objects.active = obj
-                    
+                if round(obj.dimensions.x, 3) <= round(new_dim[1], 3) and round(obj.dimensions.y, 3) <= round(new_dim[0], 3) and round(obj.dimensions.z, 3) <= round(new_dim[2], 3):
+                    if context.scene.allSmaller:
+                        obj.select_set(True)
+                        context.view_layer.objects.active = obj
+                    else:
+                        if round(obj.dimensions.x, 3) >= round(new_dim[1], 3) * float(context.scene.smallerPercentage) / 100.0 and round(obj.dimensions.y, 3) >= round(new_dim[0], 3) * float(context.scene.smallerPercentage) / 100.0 and round(obj.dimensions.z, 3) >= round(new_dim[2], 3) * float(context.scene.smallerPercentage) / 100.0:
+                            obj.select_set(True)
+                            context.view_layer.objects.active = obj
+                if round(obj.dimensions.x, 3) <= round(new_dim[2], 3) and round(obj.dimensions.y, 3) <= round(new_dim[1], 3) and round(obj.dimensions.z, 3) <= round(new_dim[0], 3):
+                    if context.scene.allSmaller:
+                        obj.select_set(True)
+                        context.view_layer.objects.active = obj
+                    else:
+                        if round(obj.dimensions.x, 3) >= round(new_dim[2], 3) * float(context.scene.smallerPercentage) / 100.0 and round(obj.dimensions.y, 3) >= round(new_dim[1], 3) * float(context.scene.smallerPercentage) / 100.0 and round(obj.dimensions.z, 3) >= round(new_dim[0], 3) * float(context.scene.smallerPercentage) / 100.0:
+                            obj.select_set(True)
+                            context.view_layer.objects.active = obj
+                if round(obj.dimensions.x, 3) <= round(new_dim[0], 3) and round(obj.dimensions.y, 3) <= round(new_dim[2], 3) and round(obj.dimensions.z, 3) <= round(new_dim[1], 3):
+                    if context.scene.allSmaller:
+                        obj.select_set(True)
+                        context.view_layer.objects.active = obj
+                    else:
+                        if round(obj.dimensions.x, 3) >= round(new_dim[0], 3) * float(context.scene.smallerPercentage) / 100.0 and round(obj.dimensions.y, 3) >= round(new_dim[2], 3) * float(context.scene.smallerPercentage) / 100.0 and round(obj.dimensions.z, 3) >= round(new_dim[1], 3) * float(context.scene.smallerPercentage) / 100.0:
+                            obj.select_set(True)
+                            context.view_layer.objects.active = obj
+                
             if context.scene.bigger:
                 if round(obj.dimensions.x, 3) >= round(new_dim[0], 3) and round(obj.dimensions.y, 3) >= round(new_dim[1], 3) and round(obj.dimensions.z, 3) >= round(new_dim[2], 3):
                     if context.scene.allBigger:
@@ -63,6 +87,30 @@ class DIMENSIONSELTOOL_OT_select(bpy.types.Operator):
                         context.view_layer.objects.active = obj
                     else:
                         if round(obj.dimensions.x, 3) <= round(new_dim[0], 3) * float(context.scene.biggerPercentage) / 100.0 and round(obj.dimensions.y, 3) <= round(new_dim[1], 3) * float(context.scene.biggerPercentage) / 100.0 and round(obj.dimensions.z, 3) <= round(new_dim[2], 3) * float(context.scene.biggerPercentage) / 100.0:
+                            obj.select_set(True)
+                            context.view_layer.objects.active = obj
+                if round(obj.dimensions.x, 3) >= round(new_dim[1], 3) and round(obj.dimensions.y, 3) >= round(new_dim[0], 3) and round(obj.dimensions.z, 3) >= round(new_dim[2], 3):
+                    if context.scene.allBigger:
+                        obj.select_set(True)
+                        context.view_layer.objects.active = obj
+                    else:
+                        if round(obj.dimensions.x, 3) <= round(new_dim[1], 3) * float(context.scene.biggerPercentage) / 100.0 and round(obj.dimensions.y, 3) <= round(new_dim[0], 3) * float(context.scene.biggerPercentage) / 100.0 and round(obj.dimensions.z, 3) <= round(new_dim[2], 3) * float(context.scene.biggerPercentage) / 100.0:
+                            obj.select_set(True)
+                            context.view_layer.objects.active = obj
+                if round(obj.dimensions.x, 3) >= round(new_dim[2], 3) and round(obj.dimensions.y, 3) >= round(new_dim[1], 3) and round(obj.dimensions.z, 3) >= round(new_dim[0], 3):
+                    if context.scene.allBigger:
+                        obj.select_set(True)
+                        context.view_layer.objects.active = obj
+                    else:
+                        if round(obj.dimensions.x, 3) <= round(new_dim[2], 3) * float(context.scene.biggerPercentage) / 100.0 and round(obj.dimensions.y, 3) <= round(new_dim[1], 3) * float(context.scene.biggerPercentage) / 100.0 and round(obj.dimensions.z, 3) <= round(new_dim[0], 3) * float(context.scene.biggerPercentage) / 100.0:
+                            obj.select_set(True)
+                            context.view_layer.objects.active = obj
+                if round(obj.dimensions.x, 3) >= round(new_dim[0], 3) and round(obj.dimensions.y, 3) >= round(new_dim[2], 3) and round(obj.dimensions.z, 3) >= round(new_dim[1], 3):
+                    if context.scene.allBigger:
+                        obj.select_set(True)
+                        context.view_layer.objects.active = obj
+                    else:
+                        if round(obj.dimensions.x, 3) <= round(new_dim[0], 3) * float(context.scene.biggerPercentage) / 100.0 and round(obj.dimensions.y, 3) <= round(new_dim[2], 3) * float(context.scene.biggerPercentage) / 100.0 and round(obj.dimensions.z, 3) <= round(new_dim[1], 3) * float(context.scene.biggerPercentage) / 100.0:
                             obj.select_set(True)
                             context.view_layer.objects.active = obj
                         
