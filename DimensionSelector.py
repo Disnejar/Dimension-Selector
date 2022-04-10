@@ -29,7 +29,7 @@ class DIMENSIONSELTOOL_OT_select(bpy.types.Operator):
             for obj in context.selected_objects:
                 obj.select_set(False)
         
-        for obj in context.scene.objects:
+        for obj in context.selectable_objects:
             if round(obj.dimensions.x, 3) == round(new_dim[0], 3) and round(obj.dimensions.y, 3) == round(new_dim[1], 3) and round(obj.dimensions.z, 3) == round(new_dim[2], 3):
                 obj.select_set(True)
                 context.view_layer.objects.active = obj
